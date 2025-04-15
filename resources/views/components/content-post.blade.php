@@ -4,7 +4,11 @@
             <div class="col items-flex align-center w50">
                 <figure class="img-user-default margin-right-small items-flex align-center">
                     <?php $image = $user->image ?? old('image') ?>
-                    <img src="{{ url("storage/{$image}") }}" />
+                    @if($image)
+                        <img src="{{ url("storage/{$image}") }}" />
+                    @else
+                        <img src="https://api.samplefaces.com/face?width=150" />
+                    @endif
                 </figure>
                 <div class="margin-left-small">
                     <h6>{{ $user->name ?? old('name') }}</h6>
@@ -18,10 +22,12 @@
         <div class="row">
             <h5 class="margin-down-small-in">{{ $post->title ?? old('title') }}</h5>
             <p class="description">{{$post->content ?? old('content') }}</p>
-            <figure class="content-figure img-post-default margin-top-small text-center">
-                <?php $imagePost = $post->image ?? old('image') ?>
-                <img src="{{ url("storage/{$imagePost}") }}" />
-            </figure>
+             @if($post->image)
+                <figure class="content-figure img-post-default margin-top-small text-center">
+                    <img src="{{ url("storage/{$post->image}") }}" />
+                </figure>
+             @endif
+
         </div>
         <div class="row margin-top-small">
             <ul class="col items-flex align-center">
@@ -50,7 +56,11 @@
                                 <li class="margin-down-small margin-top-small">
                                     <a href="{{ route('profile', $user->id) }}" class="items-flex align-center">
                                         <figure class="img-user-small margin-right-small">
-                                            <img src="{{ url("storage/{$user->image}") }}" /> 
+                                             @if($user->image)
+                                            <img src="{{ url("storage/{$user->image}") }}" />
+                                            @else
+                                                <img src="https://api.samplefaces.com/face?width=150" />
+                                            @endif 
                                         </figure>
                                         <p>{{ $comment->comment }}</p>
                                     </a>

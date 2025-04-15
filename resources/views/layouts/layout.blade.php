@@ -43,13 +43,16 @@
                 <li><a href="{{ route('home') }}"><i class="ri-home-4-line"></i></a></li>
                 <li><a href="{{ route('new-group') }}"><i class="ri-add-circle-line"></i></a></li>
                 <li><a href="{{ route('community') }}"><i class="ri-group-line"></i></a></li>
-                <li><a href="https://github.com/Raissadev"><i class="ri-github-line"></i></a></li>
             </ul>
             <ul class="col menu w30 menu items-flex just-center w90-device-small just-end-device-small">
                 <li class="user box-effect-user">
                     <a href="{{ route('profile',  Session::get('id')) }}">
                         <figure class="img-user-small margin-right-small items-flex align-center">
-                            <img src="{{ url("storage/{$image}") }}" />
+                            @if($image)
+                                <img src="{{ url("storage/{$image}") }}" />
+                            @else
+                                <img src="https://api.samplefaces.com/face?width=150" />
+                            @endif
                         </figure>
                         <h6>{{ Session::get('name') }}</h6>
                     </a>

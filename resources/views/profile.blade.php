@@ -9,7 +9,11 @@
             <div style="background-image:url('<?php if($user->banner !== null){ echo url("$user->banner"); }else{ echo url("storage/posts/hello-world.png"); } ?>');" class="banner items-flex align-end">
                 <div class="row w100 items-flex align-center flex-wrap">
                     <figure class="img-profile w15 margin-right-default">
-                        <img src="{{ url("storage/{$user->image}") }}" />
+                         @if($user->image)
+                            <img src="{{ url("storage/{$user->image}") }}" />
+                        @else
+                            <img src="https://api.samplefaces.com/face?width=150" />
+                        @endif
                     </figure>
                     <div class="col w60-device-small">
                         <h3>{{ $user->name }}</h3>
@@ -76,7 +80,11 @@
         <section class="container-form margin-down-small">
             <div class="row items-flex">
                 <figure class="img-user-default margin-right-small items-flex align-baseline">
-                    <img src="{{ url("storage/{$image}") }}" />
+                    @if($image)
+                        <img src="{{ url("storage/{$image}") }}" />
+                    @else
+                        <img src="https://api.samplefaces.com/face?width=150" />
+                    @endif
                 </figure>
                 <form class="new-post w100 pos-relative" method="post" action="{{ route('store') }}" enctype="multipart/form-data">
                     @csrf

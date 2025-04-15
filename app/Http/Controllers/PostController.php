@@ -9,19 +9,22 @@ use Session;
 
 class PostController extends Controller
 {
-
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $data = $request->all();
-        if(isset($request->image) && $request->image->isValid()){
-            $nameFile = Str::of($request->title)->slug('-') . '.' .$request->image->getClientOriginalExtension();
-            $image = $request->image->storeAs('posts', $nameFile);
+
+        if (isset($request->image) && $request->image->isValid()) {
+            $nameFile = Str::of($request->title)->slug('-') . '.' . $request->image->getClientOriginalExtension();
+            $image = $request->image->storeAs('posts', $nameFile, 'public');
             $data['image'] = $image;
         }
-        if($request->user){
+
+        if ($request->user) {
             $data['user'] = Session::get('email');
         }
+
         $post = Post::create($data);
+
         return redirect()->route('home', $post);
     }
-
 }

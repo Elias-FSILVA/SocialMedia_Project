@@ -10,7 +10,11 @@
         ?>
         <div class="box text-center">
             <figure class="img-user-bigger margin-down-small text-center">
-                <img src="{{ url("storage/{$user->image}") }}" />
+                @if($user->image)
+                    <img src="{{ url("storage/{$user->image}") }}" />
+                @else
+                    <img src="https://api.samplefaces.com/face?width=150" />
+                @endif
             </figure>
             <div>
                 <h5>{{ $user->name }}</h5>

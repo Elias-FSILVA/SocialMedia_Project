@@ -45,7 +45,11 @@
                         <li class="margin-down-small">
                             <a href="{{ route('profile', $user->id) }}" class="items-flex align-center">
                                 <figure class="img-user-small margin-right-small">
-                                    <img src="{{ url("storage/{$user->image}") }}" />
+                                    @if($user->image)
+                                        <img src="{{ url("storage/{$user->image}") }}" />
+                                    @else
+                                        <img src="https://api.samplefaces.com/face?width=150" />
+                                    @endif
                                 </figure>
                                 <h5>{{ $user->name }}</h5>
                             </a>
@@ -62,7 +66,11 @@
             <section class="container-form margin-down-small">
                 <div class="row items-flex">
                     <figure class="img-user-default margin-right-small items-flex align-baseline">
-                        <img src="{{ url("storage/{$image}") }}" />
+                        @if($image)
+                            <img src="{{ url("storage/{$image}") }}" />
+                        @else
+                            <img src="https://api.samplefaces.com/face?width=150" />
+                        @endif
                     </figure>
                     <form class="new-post w100 pos-relative" method="post" action="{{ route('store') }}" enctype="multipart/form-data">
                         @csrf

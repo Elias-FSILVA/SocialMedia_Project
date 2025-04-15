@@ -23,7 +23,11 @@
                 <div class="text-center w100-device-small">
                     <figure class="img-user-bigger margin-left-default margin-down-small">
                         <label for="image">
-                            <img src="{{ url("storage/{$user->image}") }}" />
+                            @if($user->image)
+                                <img src="{{ url("storage/{$user->image}") }}" />
+                            @else
+                                <img src="https://api.samplefaces.com/face?width=150" />
+                            @endif
                             <input type="file" name="image" id="image" value="{{ $user->image ?? old('image') }}" style="display:none" />
                         </label>
                     </figure>
